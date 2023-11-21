@@ -12,7 +12,8 @@ function! floaterm#wrapper#lf#(cmd, jobopts, ...) abort
     let s:lf_command = 'lf'
   endif
 
-  let cmd = s:lf_command . ' ' . '-last-dir-path="' . lastdir_tmpfile . '" -selection-path="' . lf_tmpfile . '"'
+  let cmd = s:lf_command . ' ' . '-last-dir-path=' . fnameescape(lastdir_tmpfile) . ' -selection-path=' . fnameescape(lf_tmpfile)
+
   if len(cmdlist) > 1
     let cmd .= ' ' . join(cmdlist[1:], ' ')
   else
