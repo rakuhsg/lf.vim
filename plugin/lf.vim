@@ -52,7 +52,7 @@ function! LfCallback(lf_tmpfile, lastdir_tmpfile, ...) abort
       let locations = []
       let floaterm_opener = edit_cmd != 'default' ? s:edit_cmd : g:floaterm_opener
       for filename in filenames
-        let dict = {'filename': fnamemodify(filename, ':p')}
+        let dict = {'filename': fnamemodify(fnameescape(filename), ':p')}
         call add(locations, dict)
       endfor
       call floaterm#util#open(locations, floaterm_opener)
