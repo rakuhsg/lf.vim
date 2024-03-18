@@ -18,6 +18,18 @@ Then, add the vim-floaterm dependency:
 
 **Note:** lf.vim should be loaded before vim-floaterm to override vim-floaterm's lf wrapper.
 
+To install with vim pack you would need to enforce the loading order, by making both packages optional:
+
+        ~$ ls .vim/pack/plugins/opt/
+        lf.vim	vim-floaterm
+
+And adding them manually in `.vimrc`:
+
+        packadd! vim-floaterm
+        packadd! lf.vim
+
+**Note:** for [some](https://stackoverflow.com/questions/67930489/native-vim-plugin-load-order) [reason](https://github.com/vim/vim/issues/7056) the loading is reversed
+
 How to use it
 -------------
 
