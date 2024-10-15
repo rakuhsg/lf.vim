@@ -23,12 +23,12 @@
 
 
 " ================ Lf =======================
-function! OpenLfIn(path, edit_cmd)
-  let currentPath = shellescape(isdirectory(a:path) ? fnamemodify(expand(a:path), ":p:h") : expand(a:path))
+function! OpenLfIn(edit_cmd)
+  let currentPath = expand('%:p:h')
   let s:edit_cmd = a:edit_cmd
   if exists(":FloatermNew")
-    exec 'FloatermNew' . ' --height=' . string(get(g:, 'lf_height', g:floaterm_height)) . 
-        \ ' --width=' . string(get(g:, 'lf_width', g:floaterm_width)) . 
+    exec 'FloatermNew' . ' --height=' . string(get(g:, 'lf_height', g:floaterm_height)) .
+        \ ' --width=' . string(get(g:, 'lf_width', g:floaterm_width)) .
         \ ' --title=lf --titleposition=center lf -- ' . currentPath
   else
     echoerr "Failed to open a floating terminal. Make sure `voldikss/vim-floaterm` is installed."
@@ -74,21 +74,11 @@ else
   let s:default_edit_cmd='edit'
 endif
 
-command! Lfcd call OpenLfIn(".", 'cd')
-command! Lflcd call OpenLfIn(".", 'lcd')
-command! LfCurrentFile call OpenLfIn("%", s:default_edit_cmd)
-command! LfCurrentDirectory call OpenLfIn("%:p:h", s:default_edit_cmd)
-command! LfWorkingDirectory call OpenLfIn(".", s:default_edit_cmd)
+command! LfCurrentDirectory call OpenLfIn(s:default_edit_cmd)
 command! Lf LfCurrentFile
 
 " To open the selected file in a new tab
-command! LfCurrentFileNewTab call OpenLfIn("%", 'tabedit')
-command! LfCurrentFileExistingOrNewTab call OpenLfIn("%", 'tab drop')
-command! LfCurrentDirectoryNewTab call OpenLfIn("%:p:h", 'tabedit')
-command! LfCurrentDirectoryExistingOrNewTab call OpenLfIn("%:p:h", 'tab drop')
-command! LfWorkingDirectoryNewTab call OpenLfIn(".", 'tabedit')
-command! LfWorkingDirectoryExistingOrNewTab call OpenLfIn(".", 'tab drop')
-command! LfNewTab LfCurrentDirectoryNewTab
+command! LfCurrentFileNewTab call OpenLfIn('tabedit')
 
 " For retro-compatibility
 function! OpenLf()
