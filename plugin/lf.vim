@@ -74,7 +74,7 @@ else
   let s:default_edit_cmd='edit'
 endif
 
-command! LfCurrentDirectory call OpenLfIn(s:default_edit_cmd)
+command! LfCurrentFile call OpenLfIn(s:default_edit_cmd)
 command! Lf LfCurrentFile
 
 " To open the selected file in a new tab
